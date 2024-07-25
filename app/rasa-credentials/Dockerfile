@@ -8,7 +8,7 @@ RUN apt-get -y update
 RUN apt-get -y install curl
 
 # Install python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Expose the port
 EXPOSE 8889

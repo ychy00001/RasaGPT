@@ -7,7 +7,7 @@ COPY . /app
 
 WORKDIR /app
 USER root
-RUN pip install python-dotenv rasa-sdk requests
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple python-dotenv rasa-sdk requests
 EXPOSE 5055
 
 CMD ["run", "actions", "--debug"]
