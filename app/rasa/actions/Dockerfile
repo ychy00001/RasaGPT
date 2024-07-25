@@ -1,4 +1,7 @@
-FROM khalosa/rasa-aarch64:3.5.2
+# x86 img
+FROM rasa/rasa:latest
+# mac image
+#FROM khalosa/rasa-aarch64:3.5.2
 
 COPY . /app
 
