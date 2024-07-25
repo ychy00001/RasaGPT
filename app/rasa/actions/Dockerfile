@@ -3,6 +3,7 @@ FROM khalosa/rasa-aarch64:3.5.2
 COPY . /app
 
 WORKDIR /app
+USER root
 RUN pip install python-dotenv rasa-sdk requests
 EXPOSE 5055
 

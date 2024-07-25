@@ -63,6 +63,7 @@ services:
   rasa-core:
     image: khalosa/rasa-aarch64:3.5.2
     container_name: chat_rasa_core
+    user: "root:root"
     env_file:
       - .env
     volumes:
@@ -84,9 +85,10 @@ services:
 # --------------------
   rasa-actions:
     build:
-      context: ./app/rasa
-      dockerfile: ./actions/Dockerfile
+      context: ./app/rasa/actions
+      dockerfile: ./Dockerfile
     container_name: chat_rasa_actions
+    user: "root:root"
     env_file:
       - .env
     ports:
@@ -105,6 +107,7 @@ services:
       context: ./app/rasa-credentials
       dockerfile: Dockerfile
     container_name: chat_rasa_credentials
+    user: "root:root"
     volumes:
       - ./app/rasa:/app/rasa
       - ./app/rasa-credentials:/app/rasa-credentials
