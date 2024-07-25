@@ -6,8 +6,6 @@
 # | http://RasaGPT.dev by @paulpierre |
 # +-----------------------------------+
 
-version: '3.9'
-
 services:
 
 # -------------------
