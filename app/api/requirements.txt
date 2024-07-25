@@ -9,4 +9,4 @@ pgvector
 tiktoken
 aiofiles
 sqlmodel
-openai
+openai==0.28.1

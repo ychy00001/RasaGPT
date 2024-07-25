@@ -1,6 +1,7 @@
 .DS_Store
 .trunk
 .vscode
+.idea
 mnt
 venv/
 .env

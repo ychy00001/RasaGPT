@@ -406,7 +406,7 @@ def retrieve_llm_response(
         temperature=temperature,
         model_name=model.model_name
         if isinstance(model, LLM_MODELS)
-        else LLM_MODELS.GPT_35_TURBO.model_name,
+        else LLM_MODELS.QWEN1_72B_Chat.model_name,
         max_tokens=max_output_tokens,
         prefix_messages=prefix_messages,
     )
@@ -422,6 +422,19 @@ def retrieve_llm_response(
 # --------------------------
 # Create document embeddings
 # --------------------------
+def get_embedding(text, model="bge-large-zh"):
+    text = text.replace("\n", " ")
+    return openai.Embedding.create(base_url="http://36.212.226.3:43101",
+                                   input = [text],
+                                   model=model).data[0].embedding
+
+def embed_documents(texts):
+    embeddings = []
+    for i in texts:
+        embedding = get_embedding(i)
+        embeddings.append(embedding)
+    return embeddings
+
 def get_embeddings(
     document_data: str,
     document_type: DOCUMENT_TYPE = DOCUMENT_TYPE.PLAINTEXT,
@@ -445,10 +458,12 @@ def get_embeddings(
     arr_documents = [doc.page_content for doc in split_documents]
 
     # https://github.com/hwchase17/langchain/blob/d18b0caf0e00414e066c9903c8df72bb5bcf9998/langchain/embeddings/openai.py#L219
-    embed_func = OpenAIEmbeddings()
+    # embed_func = OpenAIEmbeddings()
+    #
+    # embeddings = embed_func.embed_documents(
+    #     texts=arr_documents, chunk_size=LLM_CHUNK_SIZE
+    # )
 
-    embeddings = embed_func.embed_documents(
-        texts=arr_documents, chunk_size=LLM_CHUNK_SIZE
-    )
+    embeddings = embed_documents(arr_documents)
 
     return arr_documents, embeddings

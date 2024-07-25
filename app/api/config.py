@@ -156,6 +156,7 @@ AGENT_NAMES = [
 
 
 class LLM_MODELS(Enum):
+    QWEN1_72B_Chat = "Qwen1.5-72B-Chat", 2000
     TEXT_DAVINCI_003 = "text-davinci-003", 4097
     GPT_35_TURBO = "gpt-3.5-turbo", 4096
     TEXT_DAVINCI_002 = "text-davinci-002", 4097
