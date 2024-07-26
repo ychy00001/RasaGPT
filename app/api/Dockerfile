@@ -7,7 +7,7 @@ WORKDIR /app/api
 COPY . .
 
 # Install the requirements
-RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
+RUN pip install --no-cache-dir --use-deprecated=legacy-resolver -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
 # Expose the port
 EXPOSE 8888
