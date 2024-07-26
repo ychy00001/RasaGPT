@@ -506,7 +506,7 @@ def get_document_by_name(
             select(Document).where(
                 Document.project == project,
                 Document.display_name == file_name,
-                # Document.status == ENTITY_STATUS.ACTIVE.value,
+                Document.status == ENTITY_STATUS.ACTIVE.value,
             )
         ).first()
     else:
@@ -515,7 +515,7 @@ def get_document_by_name(
                 select(Document).where(
                     Document.project == project,
                     Document.display_name == file_name,
-                    Document.status == ENTITY_STATUS.ACTIVE.value,
+                    # Document.status == ENTITY_STATUS.ACTIVE.value,
                 )
             ).first()
 
