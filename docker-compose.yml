@@ -19,7 +19,7 @@ services:
     env_file:
       - .env
     ports:
-      - 8888:8888
+      - 45001:8888
     healthcheck:
       test: ["CMD", "curl", "-f", "http://api:8888/health"]
       interval: 15s
@@ -40,7 +40,7 @@ services:
     image: ngrok/ngrok:latest
     container_name: chat_ngrok
     ports:
-      - 4040:4040
+      - 45002:4040
     env_file:
       - .env
     environment:
@@ -72,7 +72,7 @@ services:
       - ./app/scripts/wait-for-it.sh:/app/wait-for-it.sh
 
     ports:
-      - 5005:5005
+      - 45003:5005
     entrypoint: ["/bin/bash", "-c", "chmod +x /app/wait-for-it.sh && /app/wait-for-it.sh rasa-credentials:8889 -t 120 -o && rasa run --enable-api --cors '*' --debug --credentials /app/credentials.yml --endpoints /app/endpoints.yml --model /app/models"] 
     networks:
       - chat-network
@@ -93,7 +93,7 @@ services:
     env_file:
       - .env
     ports:
-      - 5055:5055
+      - 45004:5055
     depends_on:
       - rasa-credentials
     networks:
@@ -113,7 +113,7 @@ services:
       - ./app/rasa:/app/rasa
       - ./app/rasa-credentials:/app/rasa-credentials
     ports:
-      - 8889:8889
+      - 45005:8889
     env_file:
       - .env
     networks:
@@ -139,7 +139,7 @@ services:
     volumes:
       - ./mnt/db:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "45006:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 5s
@@ -161,7 +161,7 @@ services:
     volumes:
        - ./mnt/pgadmin:/var/lib/pgadmin
     ports:
-      - "${PGADMIN_PORT:-5050}:80"
+      - "${PGADMIN_PORT:-45007}:80"
     restart: unless-stopped
     depends_on:
       - db
@@ -178,7 +178,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 9999:8080
+      - 45008:8080
     depends_on:
       - db
 
