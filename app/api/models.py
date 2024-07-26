@@ -2,6 +2,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import declared_attr
 from pgvector.sqlalchemy import Vector
 from sqlalchemy import Column
+from sqlalchemy import text
 from datetime import datetime
 from util import snake_case
 import uuid as uuid_pkg
@@ -592,7 +593,7 @@ def create_db():
 def create_user_permissions():
     session = Session(get_engine(dsn=SU_DSN))
     # grant access to entire database and all tables to user DB_USER
-    query = f"GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO {DB_USER};"
+    query = text(f"GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO {DB_USER};")
     session.execute(query)
     session.commit()
     session.close()
@@ -609,13 +610,13 @@ def create_vector_index():
     if PGVECTOR_ADD_INDEX is True:
         session = Session(get_engine(dsn=SU_DSN))
         for strategy in DISTANCE_STRATEGIES:
-            session.execute(strategy[3])
+            session.execute(text(strategy[3]))
             session.commit()
 
 
 def enable_vector():
     session = Session(get_engine(dsn=SU_DSN))
-    query = "CREATE EXTENSION IF NOT EXISTS vector;"
+    query = text("CREATE EXTENSION IF NOT EXISTS vector;")
     session.execute(query)
     session.commit()
     add_vector_distance_fn(session)
@@ -651,7 +652,7 @@ begin
 end;
 $$;"""
 
-        session.execute(query)
+        session.execute(text(query))
         session.commit()
     session.close()
 
