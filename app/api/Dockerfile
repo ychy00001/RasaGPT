@@ -7,7 +7,7 @@ WORKDIR /app/api
 COPY . .
 
 # Install the requirements
-RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
 # Expose the port
 EXPOSE 8888
