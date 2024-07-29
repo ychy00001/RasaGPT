@@ -11,7 +11,8 @@ from langchain import OpenAI
 
 def get_embedding(text, model="bge-large-zh"):
     text = text.replace("\n", " ")
-    return openai.Embedding.create(base_url="http://36.212.226.3:43101",
+    return openai.Embedding.create(api_base="http://36.212.226.3:43101/v1",
+                                   api_key="EMPTY",
                                    input = [text],
                                    model=model).data[0].embedding
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
     documents = [LangChainDocument(page_content=document_data)]
     logger.debug(documents)
 
-    embed_func = OpenAIEmbeddings(openai_api_base="http://36.212.226.3:43101/v1", model="bge-large-zh")
+    # embed_func = OpenAIEmbeddings(openai_api_base="http://36.212.226.3:43101/v1", model="bge-large-zh")
     # Returns an array of Documents
     doc_splitter = CharacterTextSplitter(
         chunk_size=LLM_CHUNK_SIZE, chunk_overlap=LLM_CHUNK_OVERLAP
