@@ -154,6 +154,7 @@ services:
   pgadmin:
     container_name: chat_pgadmin
     image: dpage/pgadmin4
+    user: root:root
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
