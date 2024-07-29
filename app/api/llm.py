@@ -424,7 +424,7 @@ def retrieve_llm_response(
 # --------------------------
 def get_embedding(text, model="bge-large-zh"):
     text = text.replace("\n", " ")
-    return openai.Embedding.create(api_base="http://36.212.226.3:43101/v1",
+    return openai.Embedding.create(api_base="http://172.17.0.1:43101/v1",
                                    api_key="EMPTY",
                                    input=[text],
                                    model=model).data[0].embedding
