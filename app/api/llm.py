@@ -424,7 +424,13 @@ def retrieve_llm_response(
 # --------------------------
 def get_embedding(text, model="bge-large-zh"):
     text = text.replace("\n", " ")
-    return openai.Embedding.create(api_base="http://172.17.0.1:43101/v1",
+    # 服务器使用容器docker0-IP 访问宿主机
+    # return openai.Embedding.create(api_base="http://172.17.0.1:43101/v1",
+    #                                api_key="EMPTY",
+    #                                input=[text],
+    #                                model=model).data[0].embedding
+    # 本地可以直接请求公网IP
+    return openai.Embedding.create(api_base="http://36.212.226.3:43101/v1",
                                    api_key="EMPTY",
                                    input=[text],
                                    model=model).data[0].embedding
